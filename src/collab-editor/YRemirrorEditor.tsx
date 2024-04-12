@@ -91,7 +91,7 @@ export const YRemirrorEditor = ({
       new YjsExtension({
         getProvider: () => provider,
       }),
-      new AnnotationExtension(),
+      new AnnotationExtension({}),
       ...editorExtensions(),
     ];
   }, [provider]);
