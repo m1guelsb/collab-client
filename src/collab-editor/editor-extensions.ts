@@ -1,0 +1,43 @@
+import {
+  GapCursorExtension,
+  HardBreakExtension,
+  HorizontalRuleExtension,
+  ImageExtension,
+  ItalicExtension,
+  StrikeExtension,
+  UnderlineExtension,
+  BlockquoteExtension,
+  BulletListExtension,
+  OrderedListExtension,
+  ShortcutsExtension,
+  LinkExtension,
+  BoldExtension,
+  DropCursorExtension,
+  HeadingExtension,
+  TrailingNodeExtension,
+} from "remirror/extensions";
+
+export const editorExtensions = () => [
+  new GapCursorExtension(),
+  new HardBreakExtension(),
+  new HorizontalRuleExtension(),
+  new ImageExtension(),
+  new ItalicExtension(),
+  new StrikeExtension(),
+  new UnderlineExtension(),
+  new BlockquoteExtension(),
+  new BulletListExtension(),
+  new OrderedListExtension(),
+  new ShortcutsExtension(),
+  new LinkExtension({
+    autoLink: true,
+    selectTextOnClick: true,
+  }),
+  new BoldExtension(),
+  new DropCursorExtension({
+    color: "red",
+    width: 6,
+  }),
+  new HeadingExtension(),
+  new TrailingNodeExtension(),
+];
