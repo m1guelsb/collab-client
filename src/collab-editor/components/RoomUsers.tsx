@@ -1,18 +1,15 @@
 import { useCurrentUser } from "../UserProvider";
-import { type AwarenessUser } from "../hooks/useYjsAwareness";
+import { useRoomUsersStore } from "../hooks/useRoomUsersStore";
 
-interface RoomUsersProps {
-  roomUsers: AwarenessUser[];
-}
-
-export const RoomUsers = ({ roomUsers }: RoomUsersProps) => {
+export const RoomUsers = () => {
+  const { users } = useRoomUsersStore();
   const currentUser = useCurrentUser();
 
   return (
-    <ul className="fixed bottom-1 left-1 flex flex-col gap-2 p-2 rounded-xl rounded-bl-sm bg-slate-200 border border-slate-400">
-      <h3 className="text-xl font-bold">Room</h3>
-      {roomUsers.length > 0 ? (
-        roomUsers.map((user) => {
+    users.length > 0 && (
+      <ul className="fixed bottom-1 left-1 flex flex-col gap-2 p-2 rounded-xl rounded-bl-sm bg-slate-200 border border-slate-400">
+        <h3 className="text-xl font-bold">Room</h3>
+        {users.map((user) => {
           const itsMe = user.name === currentUser.name;
           return (
             <li className="flex items-center gap-1" key={user.name}>
@@ -30,10 +27,8 @@ export const RoomUsers = ({ roomUsers }: RoomUsersProps) => {
               </p>
             </li>
           );
-        })
-      ) : (
-        <p>Loading...</p>
-      )}
-    </ul>
+        })}
+      </ul>
+    )
   );
 };

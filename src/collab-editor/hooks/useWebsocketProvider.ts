@@ -1,11 +1,11 @@
 import * as Y from "yjs";
 import { useMemo } from "react";
-import { WebrtcProvider } from "y-webrtc";
+import { WebsocketProvider } from "y-websocket";
 import { useYjsAwareness, type AwarenessUser } from "./useYjsAwareness";
 
-const providersMap = new Map<string, WebrtcProvider>();
+const providersMap = new Map<string, WebsocketProvider>();
 
-export function useWebRtcProvider(user: AwarenessUser, documentId: string) {
+export function useWebsocketProvider(user: AwarenessUser, documentId: string) {
   const ydoc = useMemo(() => new Y.Doc({ guid: documentId }), [documentId]);
   const awareness = useYjsAwareness(user, ydoc);
 
@@ -16,10 +16,14 @@ export function useWebRtcProvider(user: AwarenessUser, documentId: string) {
       return providersMap.get(documentId)!;
     }
 
-    const provider = new WebrtcProvider(roomName, ydoc, {
-      awareness,
-      signaling: [import.meta.env.VITE_WSS_URL],
-    });
+    const provider = new WebsocketProvider(
+      import.meta.env.VITE_WSS_URL,
+      roomName,
+      ydoc,
+      {
+        awareness,
+      }
+    );
     providersMap.set(documentId, provider);
     return provider;
   }, [awareness, ydoc, documentId]);

@@ -3,6 +3,9 @@
  */
 .remirror-editor-wrapper {
   padding-top: var(--rmr-space-3);
+  height: 32rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .remirror-button-active {
@@ -590,7 +593,6 @@ button:active .remirror-menu-pane-shortcut,
   position: relative;
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0;
-  overflow-y: scroll;
 }
 
 .remirror-editor.ProseMirror pre {
@@ -4666,7 +4668,7 @@ button:active .remirror-menu-pane-shortcut,
 }
 
 .remirror-theme .ProseMirror {
-  min-height: var(--rmr-space-6);
+  min-height: 100%;
   box-shadow: var(--rmr-color-border) 0px 0px 0px 0.1em;
   padding: var(--rmr-space-3);
   border-radius: var(--rmr-radius-border);

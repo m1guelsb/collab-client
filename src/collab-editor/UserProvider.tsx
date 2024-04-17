@@ -1,16 +1,31 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
+import { v4 as uuid } from "uuid";
+import { getRandomUserName } from "./util/getRandomUserName";
 
 export interface User {
   id: string;
   name: string;
 }
 
-export const UserProvider = createContext<User>({
+export const UserContext = createContext<User>({
   id: "unknown",
   name: "Unknown User",
 });
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCurrentUser = (): User => {
-  return useContext(UserProvider);
+  return useContext(UserContext);
+};
+
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const currentUser: User = useMemo(() => {
+    const id = uuid();
+    return {
+      id,
+      name: getRandomUserName(id),
+    };
+  }, []);
+
+  return (
+    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+  );
 };

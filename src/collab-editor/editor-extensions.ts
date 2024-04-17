@@ -15,9 +15,11 @@ import {
   DropCursorExtension,
   HeadingExtension,
   TrailingNodeExtension,
+  AnnotationExtension,
 } from "remirror/extensions";
 
 export const editorExtensions = () => [
+  new AnnotationExtension({}),
   new GapCursorExtension(),
   new HardBreakExtension(),
   new HorizontalRuleExtension({}),
@@ -36,7 +38,7 @@ export const editorExtensions = () => [
   new BoldExtension({}),
   new DropCursorExtension({
     color: "red",
-    width: 6,
+    width: 2,
   }),
   new HeadingExtension({}),
   new TrailingNodeExtension({}),
